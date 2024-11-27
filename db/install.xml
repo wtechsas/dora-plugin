@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/quiz/accessrule/plugin_prueba/db" VERSION="2024090300" COMMENT="XMLDB file for quizaccess_plugin_prueba plugin" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <TABLES>
+        <TABLE NAME="quizaccess_monitoring_settings" COMMENT="Configuraciones adicionales del plugin">
+            <FIELDS>
+                <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                <FIELD NAME="quizid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Foreign key to quiz.id."/>
+                <FIELD NAME="plugin_prueba_enable" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT="Boolean, if true, use the plugin_prueba mode."/>
+                <FIELD NAME="restriction_fullscreen" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="restriction_print" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="restriction_paste" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="restriction_rightclick" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="restriction_copy" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="restriction_traslate" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="restriction_detectalt" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="restriction_selecttext" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="restriction_resize" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="restriction_download" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>
+                <FIELD NAME="restriction_onlinerecognition" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>  
+                <FIELD NAME="single_monitor" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>  
+                <FIELD NAME="window_change" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>    
+            </FIELDS>
+            <KEYS>
+                <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+                <KEY NAME="quizid" TYPE="foreign-unique" FIELDS="quizid" REFTABLE="quiz" REFFIELDS="id"/>
+            </KEYS>
+        </TABLE>
+        <TABLE NAME="quizaccess_plugin_prueba_add" COMMENT="Stores the emergency answers for failed submissions">
+          <FIELDS>
+            <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+            <FIELD NAME="quizid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="Foreign key to quiz.id."/>
+            <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="false" COMMENT="User id."/>
+            <FIELD NAME="attempt" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="1" SEQUENCE="false" COMMENT="Attempt count"/>
+            <FIELD NAME="answer_plain" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Answers unencrypted."/>
+            <FIELD NAME="answer_encrypted" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Answers encrypted."/>
+            <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
+          </FIELDS>
+          <KEYS>
+            <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+            <KEY NAME="quizid" TYPE="foreign" FIELDS="quizid" REFTABLE="quiz" REFFIELDS="id"/>
+            <KEY NAME="userid" TYPE="foreign" FIELDS="userid" REFTABLE="user" REFFIELDS="id"/>
+          </KEYS>
+        </TABLE>
+        <TABLE NAME="monitoring_integration" COMMENT="plugin prueba general settings">
+              <FIELDS>
+                  <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+                  <FIELD NAME="plugin_prueba_key" TYPE="char" LENGTH="200" NOTNULL="true" SEQUENCE="false"  COMMENT="proctorizer clave"/>
+                  <FIELD NAME="plugin_prueba_secret" TYPE="char" LENGTH="200" NOTNULL="true" SEQUENCE="false" COMMENT="proctorizer secreto"/>
+                  <FIELD NAME="plugin_prueba_status" TYPE="int" LENGTH="2" DEFAULT="0" NOTNULL="true" SEQUENCE="false" COMMENT="proctorizer estatus de integracion"/>
+                  <FIELD NAME="plugin_prueba_secret_keyapi" TYPE="char" LENGTH="200" NOTNULL="true" SEQUENCE="false" COMMENT="proctorizer secreto"/>
+                  <FIELD NAME="plugin_prueba_license" TYPE="char" LENGTH="200" NOTNULL="true" SEQUENCE="false" COMMENT="proctorizer license"/>
+              </FIELDS>
+              <KEYS>
+                  <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+              </KEYS>
+              <INDEXES>
+                  <INDEX NAME="integrationkey" UNIQUE="true" FIELDS="plugin_prueba_key"/>
+              </INDEXES>
+        </TABLE>
+    </TABLES>
+</XMLDB>
