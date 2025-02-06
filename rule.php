@@ -83,49 +83,85 @@ class quizaccess_plugin_prueba extends quiz_access_rule_base {
             $mform->addElement('selectyesno', 'plugin_prueba_enable', get_string('plugin_prueba_setting', 'quizaccess_plugin_prueba'));
             $mform->addHelpButton('plugin_prueba_enable', 'plugin_prueba_setting', 'quizaccess_plugin_prueba');
             $mform->setDefault('plugin_prueba_enable', $config ? $config->plugin_prueba_enable : 0);
-            $mform->setType('plugin_prueba_setting', PARAM_BOOL);
+            $mform->setType('plugin_prueba_enable', PARAM_BOOL);
+            // $mform->setType('plugin_prueba_setting', PARAM_BOOL);
+            //COnfiguraciones antiguas de plugin_prueba
 
-            $mform->addElement('checkbox', 'restriction_fullscreen', get_string('restriction_fullscreen', 'quizaccess_plugin_prueba'));
-            $mform->addElement('checkbox', 'restriction_print', get_string('restriction_print', 'quizaccess_plugin_prueba'));
-            $mform->addElement('checkbox', 'restriction_paste', get_string('restriction_paste', 'quizaccess_plugin_prueba'));
-            $mform->addElement('checkbox', 'restriction_rightclick', get_string('restriction_rightclick', 'quizaccess_plugin_prueba'));
-            $mform->addElement('checkbox', 'restriction_copy', get_string('restriction_copy', 'quizaccess_plugin_prueba'));
-            $mform->addElement('checkbox', 'restriction_traslate', get_string('restriction_traslate', 'quizaccess_plugin_prueba'));
-            $mform->addElement('checkbox', 'restriction_detectalt', get_string('restriction_detectalt', 'quizaccess_plugin_prueba'));
-            $mform->addElement('checkbox', 'restriction_selecttext', get_string('restriction_selecttext', 'quizaccess_plugin_prueba'));
-            $mform->addElement('checkbox', 'restriction_resize', get_string('restriction_resize', 'quizaccess_plugin_prueba'));
-            $mform->addElement('checkbox', 'restriction_download', get_string('restriction_download', 'quizaccess_plugin_prueba'));
-            $mform->addElement('checkbox', 'restriction_onlinerecognition', get_string('restriction_onlinerecognition', 'quizaccess_plugin_prueba'));
-            $mform->addElement('checkbox', 'single_monitor', get_string('single_monitor', 'quizaccess_plugin_prueba'));
-            $mform->addElement('checkbox', 'window_change', get_string('window_change', 'quizaccess_plugin_prueba'));
+            // $mform->addElement('checkbox', 'restriction_fullscreen', get_string('restriction_fullscreen', 'quizaccess_plugin_prueba'));
+            // $mform->addElement('checkbox', 'restriction_print', get_string('restriction_print', 'quizaccess_plugin_prueba'));
+            // $mform->addElement('checkbox', 'restriction_paste', get_string('restriction_paste', 'quizaccess_plugin_prueba'));
+            // $mform->addElement('checkbox', 'restriction_rightclick', get_string('restriction_rightclick', 'quizaccess_plugin_prueba'));
+            // $mform->addElement('checkbox', 'restriction_copy', get_string('restriction_copy', 'quizaccess_plugin_prueba'));
+            // $mform->addElement('checkbox', 'restriction_traslate', get_string('restriction_traslate', 'quizaccess_plugin_prueba'));
+            // $mform->addElement('checkbox', 'restriction_detectalt', get_string('restriction_detectalt', 'quizaccess_plugin_prueba'));
+            // $mform->addElement('checkbox', 'restriction_selecttext', get_string('restriction_selecttext', 'quizaccess_plugin_prueba'));
+            // $mform->addElement('checkbox', 'restriction_resize', get_string('restriction_resize', 'quizaccess_plugin_prueba'));
+            // $mform->addElement('checkbox', 'restriction_download', get_string('restriction_download', 'quizaccess_plugin_prueba'));
+            // $mform->addElement('checkbox', 'restriction_onlinerecognition', get_string('restriction_onlinerecognition', 'quizaccess_plugin_prueba'));
+            // $mform->addElement('checkbox', 'single_monitor', get_string('single_monitor', 'quizaccess_plugin_prueba'));
+            // $mform->addElement('checkbox', 'window_change', get_string('window_change', 'quizaccess_plugin_prueba'));
+            // $mform->addElement('checkbox', 'deterrent_mode', get_string('deterrent_mode', 'quizaccess_plugin_prueba'));
+            // $mform->addElement('checkbox', 'focus_exam', get_string('focus_exam', 'quizaccess_plugin_prueba'));
             
-            $mform->setDefault('restriction_fullscreen', $config ? $config->restriction_fullscreen : 0);
-            $mform->setDefault('restriction_print', $config ? $config->restriction_print : 0);
-            $mform->setDefault('restriction_paste', $config ? $config->restriction_paste : 0);
-            $mform->setDefault('restriction_rightclick', $config ? $config->restriction_rightclick : 0);
-            $mform->setDefault('restriction_copy', $config ? $config->restriction_copy : 0);
-            $mform->setDefault('restriction_traslate', $config ? $config->restriction_traslate : 0);
-            $mform->setDefault('restriction_detectalt', $config ? $config->restriction_detectalt : 0);
-            $mform->setDefault('restriction_selecttext', $config ? $config->restriction_selecttext : 0);
-            $mform->setDefault('restriction_resize', $config ? $config->restriction_resize : 0);
-            $mform->setDefault('restriction_download', $config ? $config->restriction_download : 0);
-            $mform->setDefault('restriction_onlinerecognition', $config ? $config->restriction_onlinerecognition : 0);
-            $mform->setDefault('single_monitor', $config ? $config->single_monitor : 0);
-            $mform->setDefault('window_change', $config ? $config->window_change : 0);
+            // $mform->setDefault('restriction_fullscreen', $config ? $config->restriction_fullscreen : 0);
+            // $mform->setDefault('restriction_print', $config ? $config->restriction_print : 0);
+            // $mform->setDefault('restriction_paste', $config ? $config->restriction_paste : 0);
+            // $mform->setDefault('restriction_rightclick', $config ? $config->restriction_rightclick : 0);
+            // $mform->setDefault('restriction_copy', $config ? $config->restriction_copy : 0);
+            // $mform->setDefault('restriction_traslate', $config ? $config->restriction_traslate : 0);
+            // $mform->setDefault('restriction_detectalt', $config ? $config->restriction_detectalt : 0);
+            // $mform->setDefault('restriction_selecttext', $config ? $config->restriction_selecttext : 0);
+            // $mform->setDefault('restriction_resize', $config ? $config->restriction_resize : 0);
+            // $mform->setDefault('restriction_download', $config ? $config->restriction_download : 0);
+            // $mform->setDefault('restriction_onlinerecognition', $config ? $config->restriction_onlinerecognition : 0);
+            // $mform->setDefault('single_monitor', $config ? $config->single_monitor : 0);
+            // $mform->setDefault('window_change', $config ? $config->window_change : 0);
+            // $mform->setDefault('deterrent_mode', $config ? $config->deterrent_mode : 0);
+            // $mform->setDefault('focus_exam', $config ? $config->focus_exam : 0);
 
-            $mform->disabledIf('restriction_fullscreen', 'plugin_prueba_enable', 'eq', 0);
-            $mform->disabledIf('restriction_print', 'plugin_prueba_enable', 'eq', 0);
-            $mform->disabledIf('restriction_paste', 'plugin_prueba_enable', 'eq', 0);
-            $mform->disabledIf('restriction_rightclick', 'plugin_prueba_enable', 'eq', 0);
-            $mform->disabledIf('restriction_copy', 'plugin_prueba_enable', 'eq', 0);
-            $mform->disabledIf('restriction_traslate', 'plugin_prueba_enable', 'eq', 0);
-            $mform->disabledIf('restriction_detectalt', 'plugin_prueba_enable', 'eq', 0);
-            $mform->disabledIf('restriction_selecttext', 'plugin_prueba_enable', 'eq', 0);
-            $mform->disabledIf('restriction_resize', 'plugin_prueba_enable', 'eq', 0);
-            $mform->disabledIf('restriction_download', 'plugin_prueba_enable', 'eq', 0);
-            $mform->disabledIf('restriction_onlinerecognition', 'plugin_prueba_enable', 'eq', 0);
-            $mform->disabledIf('single_monitor', 'plugin_prueba_enable', 'eq', 0);
-            $mform->disabledIf('window_change', 'plugin_prueba_enable', 'eq', 0);
+            // $mform->disabledIf('restriction_fullscreen', 'plugin_prueba_enable', 'eq', 0);
+            // $mform->disabledIf('restriction_print', 'plugin_prueba_enable', 'eq', 0);
+            // $mform->disabledIf('restriction_paste', 'plugin_prueba_enable', 'eq', 0);
+            // $mform->disabledIf('restriction_rightclick', 'plugin_prueba_enable', 'eq', 0);
+            // $mform->disabledIf('restriction_copy', 'plugin_prueba_enable', 'eq', 0);
+            // $mform->disabledIf('restriction_traslate', 'plugin_prueba_enable', 'eq', 0);
+            // $mform->disabledIf('restriction_detectalt', 'plugin_prueba_enable', 'eq', 0);
+            // $mform->disabledIf('restriction_selecttext', 'plugin_prueba_enable', 'eq', 0);
+            // $mform->disabledIf('restriction_resize', 'plugin_prueba_enable', 'eq', 0);
+            // $mform->disabledIf('restriction_download', 'plugin_prueba_enable', 'eq', 0);
+            // $mform->disabledIf('restriction_onlinerecognition', 'plugin_prueba_enable', 'eq', 0);
+            // $mform->disabledIf('single_monitor', 'plugin_prueba_enable', 'eq', 0);
+            // $mform->disabledIf('window_change', 'plugin_prueba_enable', 'eq', 0);
+            // $mform->disabledIf('deterrent_mode', 'plugin_prueba_enable', 'eq', 0);
+            // $mform->disabledIf('focus_exam', 'plugin_prueba_enable', 'eq', 0);
+
+            //Configuración nuevas
+                        // Lista de restricciones con tooltips.
+            $restrictions = [
+                'restriction_fullscreen' => 'Forzar pantalla completa',
+                'restriction_print' => 'Bloquear impresión',
+                'restriction_paste' => 'Bloquear pegar',
+                'restriction_rightclick' => 'Bloquear clic derecho',
+                'restriction_copy' => 'Bloquear copiar',
+                'restriction_traslate' => 'Bloquear traducciones',
+                'restriction_detectalt' => 'Detectar tecla ALT',
+                'restriction_selecttext' => 'Deshabilitar selección de texto',
+                'restriction_resize' => 'Bloquear redimensionamiento',
+                'restriction_download' => 'Bloquear descargas',
+                'restriction_onlinerecognition' => 'Habilitar reconocimiento facial',
+                'single_monitor' => 'Permitir solo un monitor',
+                'window_change' => 'Bloquear cambio de ventana',
+                'deterrent_mode' => 'Activar modo disuasorio',
+                'focus_exam' => 'Requiere atención constante',
+            ];
+    
+            foreach ($restrictions as $key => $label) {
+                // Añadir checkbox para cada restricción con su tooltip.
+                $mform->addElement('checkbox', $key, get_string($key, 'quizaccess_plugin_prueba'));
+                $mform->addHelpButton($key, $key, 'quizaccess_plugin_prueba'); // Tooltip para cada restricción.
+                $mform->setDefault($key, $config && isset($config->$key) ? $config->$key : 0);
+                $mform->disabledIf($key, 'plugin_prueba_enable', 'eq', 0);
+            }
         }
         
     }
@@ -194,6 +230,12 @@ class quizaccess_plugin_prueba extends quiz_access_rule_base {
             if (empty($quiz->window_change) || !$quiz->window_change) {
                 $quiz->window_change = 0;
             }
+            if (empty($quiz->deterrent_mode) || !$quiz->deterrent_mode) {
+                $quiz->deterrent_mode = 0;
+            }
+            if (empty($quiz->focus_exam) || !$quiz->focus_exam) {
+                $quiz->focus_exam = 0;
+            }
         
             $record->quizid = $quiz->id;
             $record->plugin_prueba_enable = 1;
@@ -210,6 +252,8 @@ class quizaccess_plugin_prueba extends quiz_access_rule_base {
             $record->restriction_onlinerecognition = $quiz->restriction_onlinerecognition;
             $record->single_monitor = $quiz->single_monitor;
             $record->window_change = $quiz->window_change;
+            $record->deterrent_mode = $quiz->deterrent_mode;
+            $record->focus_exam = $quiz->focus_exam;
             $record->isquizstarted = 0;
 
             // $DB->insert_record('quizaccess_monitoring_settings', $record);
@@ -295,6 +339,12 @@ class quizaccess_plugin_prueba extends quiz_access_rule_base {
         }
         if (!empty($quiz->window_change)) {
             $restrictions[] = 'windowChange';
+        }
+        if (!empty($quiz->deterrent_mode)) {
+            $restrictions[] = 'deterrentMode';
+        }
+        if (!empty($quiz->focus_exam)) {
+            $restrictions[] = 'focusExam';
         }
 
         // Solo envía restricciones si hay alguna seleccionada.

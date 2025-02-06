@@ -1,5 +1,14 @@
 <?php
-
+/**
+ * @file home.php
+ * 
+ * @description This file handles the integration settings for the `quizaccess_plugin_prueba` plugin.
+ * It provides an interface to manage the plugin's credentials and integration status with an external service.
+ * The file includes forms for submitting credentials, saving them to the database, and handling API responses.
+ *
+ * @author Alex Lopez <email>
+ * @date 2024-11-26
+ */
 require_once(__DIR__ . '/../../../../config.php');
 
 //TODO modificar a rutas absolutas y no relativas
@@ -153,7 +162,16 @@ if (isset($_POST['cambiar_estado'])) {
     echo $OUTPUT->footer();
 
 }
-
+/**
+ * @purpose Validate the provided monitoring credentials by making a POST request to an external API.
+ * This function sends the credentials (API key and secret) along with the Moodle URL to an external 
+ * service to check if the credentials are valid.
+ *
+ * @param string $moodleUrl The Moodle instance URL.
+ * @param string $key The API key for the plugin.
+ * @param string $secret The API secret for the plugin.
+ * @returns object The response from the external API, decoded from JSON.
+ */
 function validate_monitoring_credentials($moodleUrl, $key, $secret) {
     // Configuración de la URL de la API y los datos a enviar
     $apiurl = 'http://3.137.61.121:3000/api/plugin/register-moodle-hash-institution';
@@ -187,7 +205,15 @@ function validate_monitoring_credentials($moodleUrl, $key, $secret) {
     return json_decode($response);
  
 }
-
+/**
+ * @purpose Save the monitoring credentials to the database and update the global status.
+ * This function inserts or updates the record for monitoring integration in the database and 
+ * sets the global status flag for the integration.
+ *
+ * @param string $key The API key for the plugin.
+ * @param string $secret The API secret for the plugin.
+ * @returns void
+ */
 function save_monitoring_credentials($key, $secret) {
     global $DB;
 
@@ -208,6 +234,14 @@ function save_monitoring_credentials($key, $secret) {
     // Inserta o actualiza la entrada en la tabla
     $DB->insert_record('monitoring_integration', $record);
 }
+/**
+ * @purpose Retrieve the monitoring status from the database.
+ * This function fetches the current status of the monitoring integration (active or inactive) 
+ * from the database.
+ *
+ * @param void
+ * @returns int The status of the monitoring integration (1 for active, 0 for inactive).
+ */
 function get_monitoring_status() {
     global $DB;
     

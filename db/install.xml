@@ -20,6 +20,8 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                 <FIELD NAME="restriction_onlinerecognition" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>  
                 <FIELD NAME="single_monitor" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>  
                 <FIELD NAME="window_change" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>    
+                <FIELD NAME="deterrent_mode" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>    
+                <FIELD NAME="focus_exam" TYPE="int" LENGTH="2" NOTNULL="true" DEFAULT="0" SEQUENCE="false" COMMENT=""/>    
             </FIELDS>
             <KEYS>
                 <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

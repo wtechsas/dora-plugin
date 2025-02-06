@@ -26,7 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->cron = 0; //Specifies the frequency (in seconds) at which Moodle's cron should execute tasks related to this plugin.
                 // Value: 0, indicating that this plugin does not require scheduled cron tasks.
-$plugin->version   = 2024100902;       // Defines the plugin's version as an integer in the format YYYYMMDDXX. This helps Moodle determine if the plugin needs an update.
+$plugin->version   = 2025041800;       // Defines the plugin's version as an integer in the format YYYYMMDDXX. This helps Moodle determine if the plugin needs an update.
 $plugin->requires  = 2022041900;       // Specifies the minimum version of Moodle required for the plugin to work properly.
 $plugin->component = 'quizaccess_plugin_prueba'; // Defines the full component name, which must be unique in Moodle. The name follows the convention plugin_type_plugin_name.
 $plugin->maturity  = MATURITY_STABLE;  // Indicates the plugin's maturity level to inform administrators of its stability.

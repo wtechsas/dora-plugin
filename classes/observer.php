@@ -250,28 +250,67 @@ class quizaccess_plugin_prueba_observer
                     'courseid' => $course->id,
                     'quizurl' => $quizurl->out(false),
                 ]);
-                $redirecturlrep = "http://3.137.61.121:3001?quizid={$quizid}&courseid={$courseid}&useremail={$email}&quizurl={$quizurl->out(false)}";
+                $redirecturlrep = "http://3.137.61.121:3001/login?quizid={$quizid}&courseid={$courseid}&useremail={$email}&quizurl={$quizurl->out(false)}";
                 // debugging($redirecturlrep, DEBUG_DEVELOPER);
-                $content .= '<script>
-                    document.addEventListener("DOMContentLoaded", function() {
-                        var regionMain = document.getElementById("region-main");
-                        if (regionMain) {
-                            var button = document.createElement("button");
-                            button.className = "btn btn-primary ";
-                            button.name = "ptrzr_show_report";
-                            button.textContent = "Ver reporte";
-                            button.onclick = function() {
-                                window.location.href = "' . $redirecturlrep . '";
-                            };
-                            regionMain.appendChild(button);
-                        }
-                    });
-                </script>';
-                echo $content;
+                $content = '<script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    var regionMain = document.getElementById("region-main");
+                    if (regionMain) {
+                        // Crear el botón "Ver reporte" y agregarlo al inicio
+                        var buttonReport = document.createElement("button");
+                        buttonReport.className = "btn btn-primary";
+                        buttonReport.name = "ptrzr_show_report";
+                        buttonReport.textContent = "Ver reporte";
+            
+                        buttonReport.onclick = function() {
+                            window.location.href = "' . $redirecturlrep . '";
+                        };
+            
+                        regionMain.insertBefore(buttonReport, regionMain.firstChild);
+                    }
+                });
+            </script>';
+            
+            echo $content;
 
             } else {
                 debugging("No es profesor o administrador", DEBUG_DEVELOPER);
+                
             }   
+            $content2 = '<script>
+            document.addEventListener("DOMContentLoaded", function() {
+            var regionMain = document.getElementById("region-main");
+            if (regionMain) {
+                // Crear el botón "Check extension" y agregarlo al final
+                var buttonExt = document.createElement("button");
+                buttonExt.className = "btn btn-warning float-right";
+                buttonExt.textContent = "Revisar Extensión";
+
+                buttonExt.onclick = function() {
+                    const monitoringDiv = document.getElementById("monitoring-ui");
+                    
+                    if (monitoringDiv) {
+                        // Si la extensión está instalada, muestra un mensaje.
+                        var existingMessage = document.getElementById("extension-installed-message");
+                        if (!existingMessage) {
+                            var message = document.createElement("p");
+                            message.id = "extension-installed-message"; // Asignar un ID único al mensaje
+                            message.textContent = "La extensión está instalada.";
+                            message.style.color = "green";
+                            message.align = "right";
+                            regionMain.insertBefore(message, regionMain.firstChild);
+                        }
+                    } else {
+                        // Si no está instalada, redirige al Chrome Web Store.
+                        window.location.href = "https://chromewebstore.google.com/detail/dora/ejfpdckhidiokdgakolifmfepmnencpg";
+                    }
+                };
+
+                regionMain.insertBefore(buttonExt, regionMain.firstChild);                }
+            });
+            </script>';
+
+            echo $content2;
         } else {
             debugging("quiz sin monitoring: $monitored", DEBUG_DEVELOPER);
         } 
@@ -294,7 +333,7 @@ class quizaccess_plugin_prueba_observer
         echo "<script>console.log('login into');</script>";
         // Obtener el URL de Moodle y la clave de integración.
         $moodle_url = $CFG->wwwroot;
-        $record = $DB->get_record('monitoring_integration3', array('id' => 1));
+        $record = $DB->get_record('monitoring_integration', array('id' => 1));
         if (!$record || empty($record->plugin_prueba_key)) {
             return; // Si no hay clave registrada, no realizar la solicitud.
         }
@@ -324,7 +363,7 @@ class quizaccess_plugin_prueba_observer
         }
     
         // Guardar el estado actualizado en la base de datos
-        $DB->update_record('monitoring_integration3', $record);
+        $DB->update_record('monitoring_integration', $record);
     }
 
 }
