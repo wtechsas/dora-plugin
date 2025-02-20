@@ -333,6 +333,7 @@ class quizaccess_plugin_prueba_observer
         echo "<script>console.log('login into');</script>";
         // Obtener el URL de Moodle y la clave de integración.
         $moodle_url = $CFG->wwwroot;
+
         $record = $DB->get_record('monitoring_integration', array('id' => 1));
         if (!$record || empty($record->plugin_prueba_key)) {
             return; // Si no hay clave registrada, no realizar la solicitud.
@@ -341,25 +342,33 @@ class quizaccess_plugin_prueba_observer
         $plugin_key = $record->plugin_prueba_key;
         $api_url = 'http://3.137.61.121:3000/api/plugin/moodle-state'; // Cambia a la URL real de tu API
     
-        // Realizar la solicitud GET
-        $curl = new curl();
-        $params = [
-            'x-moodle-url' => $moodle_url,
-            'x-moodle-key' => $plugin_key,
+        // Configurar los encabezados
+        $headers = [
+            'x-moodle-key: ' . $plugin_key,
+            'x-moodle-url: ' . $moodle_url
         ];
 
-        // Configurar los encabezados personalizados
-        $curl->setHeader('x-moodle-key', $plugin_key); // Cambia por la clave de tu plugin
-        $curl->setHeader('x-moodle-url', $CFG->wwwroot); // URL de Moodle
+        // Inicializar cURL
+        $ch = curl_init();
+        
+        // Configurar la solicitud
+        curl_setopt($ch, CURLOPT_URL, $api_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers); // Enviar los encabezados personalizados
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10); // Tiempo máximo de espera
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Seguir redirecciones si las hay
 
-        $response = $curl->get($api_url, $params);
+        // Ejecutar la petición
+        $response = curl_exec($ch);
         $result = json_decode($response);
     
         // Actualizar el estado de integración según la respuesta de la API
         if (isset($result->status) && $result->status === 200) {
             $record->plugin_prueba_status = 1;  // Activado
+            debugging("El estado de la integración: plugin activado. $response", DEBUG_DEVELOPER);
         } else {
             $record->plugin_prueba_status = 0;  // Desactivado
+            debugging("Plugin desactivado. $response", DEBUG_DEVELOPER);
         }
     
         // Guardar el estado actualizado en la base de datos
